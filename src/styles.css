@@ -1,0 +1,280 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap");
+
+/* Shared design tokens keep color and typography consistent across the application. */
+:root {
+  font-family: "Manrope", sans-serif;
+  color: #13231d;
+  background: #f4f2eb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --ink: #13231d;
+  --night: #07130f;
+  --paper: #f4f2eb;
+  --lime: #b8f064;
+  --mint: #35d087;
+  --line: rgba(19, 35, 29, 0.16);
+}
+
+/* Establish predictable sizing and smooth navigation before component-specific styles. */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; background: var(--paper); }
+button, a { font: inherit; }
+button { cursor: pointer; }
+a { color: inherit; }
+
+/* The dark hero creates contrast and contains the primary animated visual. */
+.hero {
+  min-height: 92vh;
+  color: #f8f7f1;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(53, 208, 135, 0.16), transparent 28%),
+    linear-gradient(145deg, #07130f 0%, #0c2018 100%);
+  overflow: hidden;
+}
+
+/* Reuse one centered content width for every major page section. */
+.nav-shell,
+.hero-grid,
+.lab-section,
+.results-section,
+.method-section,
+footer {
+  width: min(1180px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+/* The compact navigation keeps the project identity visible without competing with the lab. */
+.nav-shell { height: 84px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,.14); }
+.brand { display: inline-flex; gap: 12px; align-items: center; font-weight: 800; text-decoration: none; letter-spacing: -.02em; }
+.brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: var(--lime); color: var(--night); font: 500 13px "DM Mono", monospace; }
+.nav-links { display: flex; gap: 30px; font-size: 14px; }
+.nav-links a { color: rgba(255,255,255,.72); text-decoration: none; }
+.nav-links a:hover { color: white; }
+
+/* The hero grid adapts the large headline and animated pathway to wide screens. */
+.hero-grid { min-height: calc(92vh - 84px); display: grid; grid-template-columns: 1.05fr .95fr; gap: 40px; align-items: center; padding: 80px 0 100px; }
+.hero-copy { position: relative; z-index: 2; }
+.eyebrow { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,.65); font: 500 12px "DM Mono", monospace; letter-spacing: .12em; text-transform: uppercase; }
+.eyebrow span { width: 24px; height: 2px; background: var(--lime); }
+.eyebrow.dark { color: #66716c; }
+.hero h1 { max-width: 720px; margin: 24px 0; font-size: clamp(50px, 6vw, 88px); line-height: .98; letter-spacing: -.065em; }
+.hero h1 em { color: var(--lime); font-style: normal; }
+.hero-lede { max-width: 620px; color: rgba(255,255,255,.68); font-size: 18px; line-height: 1.7; }
+.primary-link { display: inline-flex; gap: 24px; align-items: center; margin-top: 28px; padding: 15px 20px; border-radius: 100px; background: var(--lime); color: var(--night); font-weight: 800; text-decoration: none; }
+.primary-link span { transition: transform .25s ease; }
+.primary-link:hover span { transform: translateY(4px); }
+
+/* The track illustration uses only CSS shapes, so it stays crisp and loads instantly. */
+.track-visual { position: relative; height: 530px; border: 1px solid rgba(255,255,255,.12); border-radius: 50% 50% 8px 8px; overflow: hidden; background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015)); transform: perspective(900px) rotateY(-6deg); }
+.track-visual::after { content: ""; position: absolute; inset: 8%; border: 1px solid rgba(184,240,100,.17); border-radius: 50%; animation: breathe 3s ease-in-out infinite; }
+.track-lines { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(4, 1fr); transform: perspective(500px) rotateX(55deg) scale(1.3); transform-origin: bottom; }
+.track-lines span { border-right: 1px solid rgba(255,255,255,.12); }
+.runner-dot { position: absolute; left: 48%; top: 57%; width: 18px; height: 18px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 10px rgba(184,240,100,.12), 0 0 38px rgba(184,240,100,.7); animation: runner 2.8s cubic-bezier(.4,0,.2,1) infinite; }
+.signal-wave { position: absolute; inset: 0; display: grid; place-items: center; }
+.signal-wave i { position: absolute; width: 80px; height: 80px; border: 1px solid rgba(184,240,100,.28); border-radius: 50%; animation: signal 3s ease-out infinite; }
+.signal-wave i:nth-child(2) { animation-delay: 1s; }
+.signal-wave i:nth-child(3) { animation-delay: 2s; }
+.track-visual > p { position: absolute; bottom: 26px; left: 0; right: 0; text-align: center; color: rgba(255,255,255,.45); font: 12px "DM Mono", monospace; letter-spacing: .1em; }
+.track-visual b { margin: 0 12px; color: var(--lime); }
+.orb { position: absolute; border-radius: 50%; filter: blur(2px); }
+.orb-one { width: 120px; height: 120px; right: 4%; top: 12%; background: rgba(92,156,255,.14); animation: float 6s ease-in-out infinite; }
+.orb-two { width: 70px; height: 70px; left: 12%; bottom: 16%; background: rgba(255,91,85,.12); animation: float 4s 1s ease-in-out infinite; }
+
+/* Section headings use a shared editorial layout throughout the page. */
+.lab-section, .method-section { padding: 110px 0; }
+.section-heading { display: flex; justify-content: space-between; align-items: end; gap: 40px; margin-bottom: 46px; }
+.section-heading h2 { max-width: 720px; margin: 14px 0 0; font-size: clamp(36px, 5vw, 62px); line-height: 1.05; letter-spacing: -.055em; }
+.section-heading > p { max-width: 360px; color: #65706b; line-height: 1.65; }
+
+/* The hypothesis is visible before participation so the scientific question is explicit. */
+.hypothesis-card { display: grid; grid-template-columns: 130px 1fr; gap: 28px; margin-bottom: 30px; padding: 24px 28px; border-left: 4px solid var(--mint); background: #e8e5da; }
+.hypothesis-card span { color: #66716c; font: 11px "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
+.hypothesis-card p { margin: 0; line-height: 1.65; }
+
+/* The task selector behaves visually like a two-option tab control. */
+.task-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--line); }
+.task-tabs button { flex: 1; display: flex; gap: 18px; align-items: center; padding: 22px; border: 0; border-bottom: 3px solid transparent; background: transparent; color: #75807b; font-weight: 700; text-align: left; }
+.task-tabs button span { font: 12px "DM Mono", monospace; }
+.task-tabs button.selected { color: var(--ink); border-bottom-color: var(--ink); }
+
+/* The experiment shell separates instructions from the timed interaction surface. */
+.experiment-shell { display: grid; grid-template-columns: 340px 1fr; min-height: 620px; margin-top: 28px; border: 1px solid var(--line); background: #faf9f4; box-shadow: 0 24px 70px rgba(19,35,29,.08); }
+.instruction-panel { padding: 42px 34px; border-right: 1px solid var(--line); background: #ece9df; }
+.panel-number { color: #8a938f; font: 14px "DM Mono", monospace; }
+.instruction-panel h3 { margin: 90px 0 18px; font-size: 30px; letter-spacing: -.04em; }
+.instruction-panel > p { color: #606b66; line-height: 1.65; }
+.key-guide { display: grid; gap: 12px; margin: 34px 0; }
+.key-guide span { display: flex; gap: 12px; align-items: center; font-size: 13px; }
+kbd { display: inline-grid; place-items: center; min-width: 34px; height: 30px; border: 1px solid rgba(19,35,29,.18); border-bottom-width: 3px; border-radius: 6px; background: white; font: 500 12px "DM Mono", monospace; }
+.trial-count { padding-top: 22px; border-top: 1px solid var(--line); font: 12px "DM Mono", monospace; }
+
+/* The stimulus panel gives every experiment phase a stable central stage. */
+.stimulus-panel { position: relative; display: flex; flex-direction: column; padding: 32px; overflow: hidden; }
+.progress-row { display: flex; justify-content: space-between; color: #737d78; font: 11px "DM Mono", monospace; text-transform: uppercase; letter-spacing: .07em; }
+.progress-track { height: 3px; margin-top: 14px; background: #e1ded4; overflow: hidden; }
+.progress-track span { display: block; height: 100%; background: var(--mint); transition: width .45s ease; }
+.stimulus-stage { flex: 1; display: grid; place-items: center; min-height: 330px; }
+.start-button, .download-button { padding: 16px 22px; border: 0; border-radius: 100px; background: var(--ink); color: white; font-weight: 800; }
+.start-button { font-size: 18px; box-shadow: 0 0 0 0 rgba(53,208,135,.35); animation: buttonPulse 2s infinite; }
+.start-button:disabled { cursor: not-allowed; opacity: .4; animation: none; }
+.countdown { color: var(--ink); font: 500 clamp(80px, 12vw, 160px) "DM Mono", monospace; animation: countdown .7s ease both; }
+.focus-point { width: 16px; height: 16px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 0 rgba(19,35,29,.22); animation: focus 1.2s ease-in-out infinite; }
+.color-target { width: min(180px, 40vw); aspect-ratio: 1; border: 12px solid rgba(255,255,255,.72); border-radius: 50%; box-shadow: 0 18px 60px rgba(19,35,29,.2); animation: stimulusIn .16s ease-out both; }
+.stroop-word { margin: 0; font-size: clamp(58px, 9vw, 112px); font-weight: 800; letter-spacing: -.04em; animation: stimulusIn .16s ease-out both; }
+.complete-mark { display: grid; place-items: center; gap: 16px; animation: stimulusIn .3s ease-out both; }
+.complete-mark span { display: grid; place-items: center; width: 80px; height: 80px; border-radius: 50%; background: var(--lime); font-size: 32px; }
+.complete-mark strong { font-size: 24px; }
+.feedback-line { min-height: 26px; margin: 0 0 20px; text-align: center; color: #66716c; }
+.response-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.response-buttons button { display: flex; justify-content: center; align-items: center; gap: 8px; padding: 12px 8px; border: 1px solid var(--line); background: white; color: var(--ink); font-size: 12px; font-weight: 700; transition: transform .15s ease, border-color .15s ease; }
+.response-buttons button:not(:disabled):hover { transform: translateY(-3px); border-color: var(--key-color); }
+.response-buttons button:disabled { cursor: not-allowed; opacity: .45; }
+
+/* The setup card collects informed agreement without collecting identifying information. */
+.study-setup { width: min(560px, 100%); padding: 24px 0; }
+.setup-kicker { margin: 0 0 8px; color: #66716c; font: 11px "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
+.study-setup h3 { margin: 0 0 18px; font-size: 30px; letter-spacing: -.04em; }
+.study-setup ul { display: grid; gap: 10px; margin: 0 0 22px; padding-left: 22px; color: #5f6a65; line-height: 1.5; }
+.consent-row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 24px; padding: 16px; border: 1px solid var(--line); background: #f4f2eb; line-height: 1.45; }
+.consent-row input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--ink); }
+.block-break { display: grid; justify-items: center; max-width: 520px; text-align: center; }
+.block-break > span { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: var(--lime); font-size: 26px; }
+.block-break h3 { margin: 18px 0 8px; font-size: 30px; }
+.block-break p { margin: 0 0 24px; color: #66716c; line-height: 1.6; }
+
+/* Results start hidden and animate into view only when the session is complete. */
+.results-section { display: none; padding: 110px 0; color: #f7f6f0; }
+.results-section.visible { display: block; animation: reveal .5s ease both; }
+.results-section::before { content: ""; position: absolute; z-index: -1; left: 0; right: 0; margin-top: -110px; height: calc(100% + 220px); background: var(--night); }
+.results-section { position: relative; z-index: 0; }
+.section-heading.light > p { color: rgba(255,255,255,.58); }
+.metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid rgba(255,255,255,.14); }
+.metric-grid article { min-height: 190px; padding: 28px; border-right: 1px solid rgba(255,255,255,.14); }
+.metric-grid article:last-child { border-right: 0; }
+.metric-grid p, .metric-grid small { color: rgba(255,255,255,.55); }
+.metric-grid p { margin: 0 0 40px; font: 11px "DM Mono", monospace; text-transform: uppercase; }
+.metric-grid strong { display: block; color: var(--lime); font-size: clamp(32px, 4vw, 48px); letter-spacing: -.05em; }
+.metric-grid small { display: block; margin-top: 8px; }
+.session-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+.session-meta span { padding: 8px 12px; border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.62); font: 10px "DM Mono", monospace; text-transform: uppercase; }
+.condition-grid { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 18px; border: 1px solid rgba(184,240,100,.3); }
+.condition-grid article { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 22px; border-right: 1px solid rgba(184,240,100,.3); }
+.condition-grid article:last-child { border-right: 0; }
+.condition-grid span { color: rgba(255,255,255,.58); font-size: 12px; }
+.condition-grid strong { color: var(--lime); font-size: 24px; }
+.interpretation-card { display: grid; grid-template-columns: 150px 1fr; gap: 24px; margin-top: 18px; padding: 24px; background: rgba(184,240,100,.08); border-left: 3px solid var(--lime); }
+.interpretation-card span { color: var(--lime); font: 11px "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
+.interpretation-card p { margin: 0; color: rgba(255,255,255,.76); line-height: 1.65; }
+.analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.chart-card { margin-top: 24px; padding: 32px; background: #10241b; border: 1px solid rgba(255,255,255,.12); }
+.chart-title { display: flex; justify-content: space-between; align-items: end; }
+.chart-title p { margin: 0; color: rgba(255,255,255,.5); font: 11px "DM Mono", monospace; text-transform: uppercase; }
+.chart-title h3 { margin: 8px 0 0; font-size: 24px; }
+.chart-title > span { color: rgba(255,255,255,.4); font: 11px "DM Mono", monospace; }
+.trial-chart { display: flex; align-items: end; gap: 10px; height: 270px; margin-top: 36px; border-bottom: 1px solid rgba(255,255,255,.2); }
+.bar-column { flex: 1; display: grid; grid-template-rows: 18px 1fr 24px; align-items: end; height: 100%; text-align: center; }
+.bar-track { height: 100%; display: flex; align-items: end; background: rgba(255,255,255,.03); }
+.bar-fill { width: 100%; background: var(--mint); transform-origin: bottom; animation: bars .7s cubic-bezier(.2,.8,.2,1) both; }
+.bar-fill.incorrect { background: #ff5b55; }
+.bar-value, .bar-label { color: rgba(255,255,255,.55); font: 10px "DM Mono", monospace; }
+.bar-label { padding-top: 8px; }
+.empty-chart { padding: 80px 0; color: rgba(255,255,255,.5); text-align: center; }
+.speed-accuracy-plot { position: relative; height: 270px; margin: 36px 10px 0 62px; border-left: 1px solid rgba(255,255,255,.2); border-bottom: 1px solid rgba(255,255,255,.2); }
+.plot-label { position: absolute; right: calc(100% + 12px); color: rgba(255,255,255,.55); font: 10px "DM Mono", monospace; }
+.correct-label { top: 21%; }
+.error-label { top: 68%; }
+.plot-grid { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(5, 1fr); }
+.plot-grid span { border-right: 1px solid rgba(255,255,255,.06); }
+.plot-dot { position: absolute; width: 12px; height: 12px; margin: -6px 0 0 -6px; border: 2px solid #10241b; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 2px rgba(53,208,135,.25); animation: stimulusIn .35s ease both; }
+.plot-dot.incorrect { background: #ff5b55; box-shadow: 0 0 0 2px rgba(255,91,85,.25); }
+.plot-axis { position: absolute; top: calc(100% + 10px); left: 0; right: 0; display: flex; justify-content: space-between; color: rgba(255,255,255,.45); font: 9px "DM Mono", monospace; }
+.results-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; }
+.download-button { background: var(--lime); color: var(--night); }
+.text-button { border: 0; background: transparent; color: white; text-decoration: underline; text-underline-offset: 5px; }
+.history-card { margin-top: 52px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,.14); }
+.history-card > div:first-child p { margin: 0; color: rgba(255,255,255,.48); font: 10px "DM Mono", monospace; text-transform: uppercase; }
+.history-card h3 { margin: 8px 0 22px; font-size: 24px; }
+.history-list { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.history-list article { padding: 18px; background: rgba(255,255,255,.05); }
+.history-list span, .history-list small { display: block; color: rgba(255,255,255,.5); font-size: 10px; }
+.history-list strong { display: block; margin: 12px 0 4px; color: var(--lime); font-size: 20px; }
+
+/* Method cards document the experimental assumptions in a scannable grid. */
+.method-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.method-grid article { min-height: 290px; padding: 30px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.method-grid span { color: #8a938f; font: 12px "DM Mono", monospace; }
+.method-grid h3 { margin: 80px 0 16px; font-size: 20px; letter-spacing: -.03em; }
+.method-grid p { color: #65706b; line-height: 1.65; }
+.limitation-note { display: grid; grid-template-columns: 240px 1fr; gap: 40px; margin-top: 24px; padding: 30px; background: #e8e5da; }
+.limitation-note p { margin: 0; color: #65706b; line-height: 1.65; }
+.privacy-section { padding: 130px max(20px, calc((100vw - 1180px) / 2)); color: white; background: #236a4b; }
+.privacy-section h2 { max-width: 760px; margin: 20px 0; font-size: clamp(42px, 6vw, 74px); line-height: 1; letter-spacing: -.055em; }
+.privacy-section > p:last-child { max-width: 720px; color: rgba(255,255,255,.72); font-size: 18px; line-height: 1.7; }
+
+/* The simple footer ends the experience without introducing unrelated links. */
+footer { display: flex; justify-content: space-between; align-items: center; gap: 28px; padding: 48px 0; }
+footer p { color: #6b7570; font-size: 13px; }
+footer > a:last-child { font-size: 13px; }
+
+/* Motion definitions cover signal waves, feedback and result-chart entrances. */
+@keyframes signal { 0% { transform: scale(.2); opacity: 0; } 20% { opacity: 1; } 100% { transform: scale(5.2); opacity: 0; } }
+@keyframes runner { 0%,100% { transform: translate(-80px, 55px); } 50% { transform: translate(110px, -80px); } }
+@keyframes float { 50% { transform: translateY(-20px); } }
+@keyframes breathe { 50% { transform: scale(.96); opacity: .5; } }
+@keyframes buttonPulse { 70% { box-shadow: 0 0 0 18px rgba(53,208,135,0); } }
+@keyframes countdown { from { transform: scale(.55); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes focus { 50% { box-shadow: 0 0 0 16px rgba(19,35,29,0); } }
+@keyframes stimulusIn { from { opacity: 0; transform: scale(.78); } to { opacity: 1; transform: scale(1); } }
+@keyframes bars { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes reveal { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Tablet rules stack the experiment and reduce four-column information grids. */
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; padding-top: 60px; }
+  .track-visual { height: 400px; }
+  .experiment-shell { grid-template-columns: 1fr; }
+  .instruction-panel { border-right: 0; border-bottom: 1px solid var(--line); }
+  .instruction-panel h3 { margin-top: 30px; }
+  .key-guide { grid-template-columns: repeat(2, 1fr); }
+  .metric-grid, .method-grid { grid-template-columns: repeat(2, 1fr); }
+  .metric-grid article:nth-child(2) { border-right: 0; }
+  .analysis-grid { grid-template-columns: 1fr; }
+  .history-list { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Phone rules increase touch usability and remove nonessential navigation links. */
+@media (max-width: 620px) {
+  .nav-shell, .hero-grid, .lab-section, .results-section, .method-section, footer { width: min(100% - 28px, 1180px); }
+  .nav-links { display: none; }
+  .hero { min-height: auto; }
+  .hero-grid { min-height: auto; padding-bottom: 70px; }
+  .track-visual { height: 330px; }
+  .lab-section, .method-section, .results-section { padding: 76px 0; }
+  .section-heading { display: block; }
+  .section-heading > p { margin-top: 22px; }
+  .task-tabs button { padding: 16px 8px; font-size: 12px; }
+  .task-tabs button span { display: none; }
+  .instruction-panel, .stimulus-panel { padding: 24px 20px; }
+  .stimulus-stage { min-height: 290px; }
+  .response-buttons { grid-template-columns: repeat(2, 1fr); }
+  .metric-grid, .method-grid { grid-template-columns: 1fr; }
+  .metric-grid article { min-height: 150px; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.14); }
+  .metric-grid p { margin-bottom: 24px; }
+  .chart-card { padding: 20px 12px; }
+  .bar-value { display: none; }
+  .results-actions, footer { flex-direction: column; align-items: flex-start; }
+  .limitation-note { grid-template-columns: 1fr; }
+  .hypothesis-card, .interpretation-card { grid-template-columns: 1fr; gap: 10px; }
+  .condition-grid { grid-template-columns: 1fr; }
+  .condition-grid article { border-right: 0; border-bottom: 1px solid rgba(184,240,100,.3); }
+  .condition-grid article:last-child { border-bottom: 0; }
+  .history-list { grid-template-columns: 1fr; }
+  .study-setup h3 { font-size: 25px; }
+}
+
+/* Respect the operating-system accessibility preference by minimizing all motion. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
