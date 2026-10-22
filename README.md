@@ -5,6 +5,8 @@ Reaction Time Lab is an interactive browser experiment for exploring two ideas f
 - **Choice reaction time:** how quickly a person selects the correct response from four alternatives.
 - **Stroop interference:** how a conflicting color word can affect the speed of identifying its ink color.
 
+**Live demo:** [Open Reaction Time Lab](https://reaction-time-lab-xi.vercel.app/)
+
 The project combines cognitive science, experimental design, front-end development and transparent data analysis. It is an educational demonstration, not a clinical or athletic diagnostic tool.
 
 ## Live features
