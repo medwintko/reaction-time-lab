@@ -9,16 +9,23 @@ The project combines cognitive science, experimental design, front-end developme
 
 ## Live features
 
+- Anonymous study setup with clear participation and limitation information
+- Separate four-trial practice block that is excluded from primary analysis
+- Balanced, randomized Stroop conditions with equal congruent and incongruent trials
 - Animated countdown, fixation point, randomized stimulus timing and immediate feedback
 - Keyboard and touch controls for red, green, blue and yellow responses
 - Trial-level reaction time, accuracy and quality classification
 - Median reaction time, fastest clean response and median absolute deviation
-- Stroop-effect estimate from congruent and incongruent trials
-- Animated trial chart and CSV download
-- Browser-only data handling with no account, database or personal-data collection
+- Congruent and incongruent medians with a Stroop-interference estimate
+- Trial chart, speed–accuracy visualization and cautious result interpretation
+- Anonymous participant/session IDs and analysis-ready CSV download
+- Up to five session summaries stored locally for within-device comparison
+- Browser-only data handling with no account, server or personal-data collection
 - Responsive layout and reduced-motion accessibility support
 
 ## How the experiment works
+
+The app begins with four practice trials. Practice observations are included in the downloadable data for transparency but excluded from result calculations. The recorded block contains 16 choice-reaction trials or 24 Stroop trials. Stroop blocks are balanced to contain equal numbers of congruent and incongruent conditions, then randomized.
 
 The app waits for a random interval between 700 and 1,600 milliseconds before presenting each target. Timing begins with the browser's high-resolution `performance.now()` clock when the target appears and ends when a response is recorded.
 
@@ -41,7 +48,11 @@ The median is reported instead of only a mean because it is less sensitive to an
 
 ## Limitations
 
-Browser measurements are affected by the computer or phone, display refresh rate, keyboard or touch hardware, browser workload, fatigue and distraction. Results from different devices should not be treated as perfectly comparable.
+Browser measurements are affected by the computer or phone, display refresh rate, keyboard or touch hardware, browser workload, fatigue and distraction. Results from different devices should not be treated as perfectly comparable. The short protocol is designed for education and portfolio demonstration, not population-level inference, diagnosis or athletic assessment.
+
+## Privacy
+
+Raw trial data remains in the active browser tab unless the participant downloads it. The application stores only the five most recent summary results in that browser's local storage for optional session comparison. It does not request a name, email address or account, and it does not send study data to a server.
 
 ## Technology
 
